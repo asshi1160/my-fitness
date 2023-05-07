@@ -1,0 +1,35 @@
+version: '3.9'
+services:
+  go:
+    container_name: my-fitness_go
+    build:
+      context: .
+      dockerfile: ./go/Dockerfile
+    environment:
+      DB_NAME: my_fitness
+      DB_USER: my-fitness
+      DB_PASSWORD: my-fitness
+    ports:
+      - 8888:8080
+    volumes:
+      - ./app:/app
+    working_dir: /app
+
+  mysql:
+    container_name: my-fitness_mysql
+    build:
+      context: .
+      dockerfile: ./mysql/Dockerfile
+    environment:
+      MYSQL_DATABASE: my_fitness
+      MYSQL_ROOT_PASSWORD: my-fitness
+      MYSQL_USER: my-fitness
+      MYSQL_PASSWORD: my-fitness
+    ports:
+      - 13306:3306
+    volumes:
+      - mysql-data:/var/lib/mysql
+      - ./mysql/sql/create_db.sql:/docker-entrypoint-initdb.d/create_db.sql
+
+volumes:
+  mysql-data:
