@@ -1,14 +1,12 @@
 package models
 
 import (
-	"database/sql"
-
 	"gorm.io/gorm"
 )
 
 type User struct {
 	gorm.Model
-	Email      string `gorm:"unique;not null"`
-	Password   string `gorm:"not null"`
-	DispayName sql.NullString
+	Email      string  `gorm:"type:varchar(255);unique;not null"`
+	Password   string  `gorm:"type:varchar(255);not null"`
+	DispayName *string `gorm:"type:varchar(255)"`
 }
