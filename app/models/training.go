@@ -5,7 +5,9 @@ import (
 )
 
 type Training struct {
-	ID            uint     `gorm:"primaryKey"`
+	ID            uint `gorm:"primaryKey"`
+	UserID        uint
+	User          User
 	BodyPart      string   `gorm:"type:varchar(10);not null"`
 	TrainingType  string   `gorm:"type:varchar(20);not null"`
 	TrainingName  string   `gorm:"type:varchar(30);unique;not null"`
